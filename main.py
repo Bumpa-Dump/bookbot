@@ -1,9 +1,12 @@
-def main():
-    with open("books/frankenstein.txt") as f:
+def main(location):
+    with open(location) as f:
         file_contents = f.read()
-    print(file_contents)
-    print(wordcount(file_contents))
-    charcount(file_contents)
+    usable_dict = charcount(file_contents)
+    print("--- Begin Report of ", location, " ---")
+    print("Total Word Count: ", wordcount(file_contents))
+    print("")
+    for entry in usable_dict:
+        print("The '", entry, "' character appeared ", usable_dict[entry], " times.")
 
 def wordcount(text):
     wordslist = text.split()
@@ -16,7 +19,9 @@ def charcount (text):
             char_dict[char] += 1
         else:
             char_dict[char] = 1
-    print(char_dict)
+    return(char_dict)
 
 
-main()
+main("books/frankenstein.txt")
+
+# need to convert dictionary to list of dictionaries (list.append (temp_dict establish values?)), remove non-alphabetic characters (boring), and organize by frequency
